@@ -1,0 +1,11 @@
+{
+  "name": "ObraSync",
+  "short_name": "ObraSync",
+  "description": "Gestão inteligente de obras",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F5F7F5",
+  "theme_color": "#142B29",
+  "icons": [{ "src": "./favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
