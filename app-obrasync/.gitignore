@@ -4,3 +4,5 @@ dist-teste/
 *.log
 .env*
 .wrangler/
+
+supabase/.temp/

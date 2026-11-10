@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import type { Session } from '@supabase/supabase-js';
 import { Campo, Marca } from './ui';
+import { PortaoAssinatura } from './Assinatura';
 import { abrirConta, abrirLocal, fecharConta, nuvemAtiva, supabase } from '../lib/nuvem';
 
 const TAMANHO_SENHA = 8;
@@ -187,5 +188,5 @@ export function Portao({ children }: { children: ReactNode }) {
     );
   }
   if (!pronto) return <Carregando texto="Carregando seus dados..." />;
-  return <>{children}</>;
+  return <PortaoAssinatura>{children}</PortaoAssinatura>;
 }

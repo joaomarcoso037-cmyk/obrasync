@@ -48,3 +48,14 @@ export function semObra(d: Dados, id: string): Dados {
     funcionarios: d.funcionarios.map((f) => ({ ...f, obraIds: f.obraIds.filter((x) => x !== id) })),
   };
 }
+
+/** Baixa uma cópia de todos os dados num arquivo .json, que depois pode ser restaurado em Ajustes. */
+export function baixarBackup(d: Dados, dia: string) {
+  const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `obrasync-backup-${dia}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}

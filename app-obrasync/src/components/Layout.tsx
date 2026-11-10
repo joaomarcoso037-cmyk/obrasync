@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { AlertTriangle, Building2, CalendarDays, FileText, HardHat, LayoutDashboard, Menu, Settings, Users, Wallet } from 'lucide-react';
 import { Marca } from './ui';
+import { AvisoAssinatura } from './Assinatura';
 import { nuvemAtiva, useSituacao } from '../lib/nuvem';
 
 const MENU = [
@@ -50,6 +51,7 @@ export function Layout() {
 
       <main className="conteudo">
         <div className="pagina">
+          <AvisoAssinatura />
           {situacao === 'offline' && (
             <div className="aviso ruim" role="alert">
               <AlertTriangle size={20} aria-hidden="true" />

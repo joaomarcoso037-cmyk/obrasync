@@ -1,0 +1,7 @@
+# Usado só para publicar as funções do servidor (configurar-cobranca.bat).
+project_id = "zntiblqunnowsrijmzpj"
+
+# Quem chama o webhook é o Asaas, que não tem login na Supabase.
+# A segurança fica no token conferido dentro da função.
+[functions.asaas-webhook]
+verify_jwt = false

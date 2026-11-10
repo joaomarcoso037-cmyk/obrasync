@@ -309,3 +309,19 @@ td { padding: 10px 6px; border-bottom: 1px solid var(--linha); vertical-align: t
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+
+/* Assinatura */
+.planos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; border: 0; padding: 0; margin: 0; }
+.planos legend { font-weight: 700; margin-bottom: 6px; padding: 0; }
+.plano {
+  display: flex; flex-direction: column; gap: 2px; padding: 14px; border: 2px solid var(--linha); border-radius: 12px;
+  cursor: pointer; background: var(--branco); position: relative;
+}
+.plano:has(input:checked) { border-color: var(--verde); background: var(--lima-suave); }
+.plano:has(input:focus-visible) { outline: 3px solid var(--lima); outline-offset: 2px; }
+.plano input { position: absolute; opacity: 0; pointer-events: none; }
+.plano strong { color: var(--verde); font-size: 1.15rem; }
+.plano small { color: var(--suave); }
+.plano .selo { align-self: flex-start; margin-top: 4px; }
+.assinatura-linha { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+@media (max-width: 420px) { .planos { grid-template-columns: minmax(0, 1fr); } }

@@ -2,10 +2,11 @@ import { useRef, useState, type ChangeEvent, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { CalendarDays, ChevronRight, Download, HardHat, Info, LogOut, Settings, Upload, Users } from 'lucide-react';
 import { Cabecalho, Campo } from '../components/ui';
+import { SecaoAssinatura } from '../components/Assinatura';
 import { dadosDeExemplo } from '../lib/exemplo';
 import { hoje } from '../lib/formato';
 import { nuvemAtiva, supabase } from '../lib/nuvem';
-import { VAZIO, lerBackup } from '../lib/regras';
+import { VAZIO, baixarBackup, lerBackup } from '../lib/regras';
 import { mudar, substituirDados, useDados } from '../lib/store';
 
 const LINKS = [
@@ -48,16 +49,6 @@ export function Ajustes() {
     setSalvo(true);
   }
 
-  function baixarBackup() {
-    const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `obrasync-backup-${hoje()}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-
   async function restaurar(e: ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
     e.target.value = '';
@@ -92,6 +83,8 @@ export function Ajustes() {
     <>
       <Cabecalho titulo="Ajustes" subtitulo="Sua empresa e a segurança dos seus dados" />
 
+      {nuvemAtiva && <SecaoAssinatura />}
+
       <section className="cartao">
         <h2 style={{ marginBottom: 4 }}>Minha empresa</h2>
         <p style={{ color: 'var(--suave)', marginBottom: 12 }}>Esses dados aparecem nos orçamentos que você envia.</p>
@@ -119,7 +112,7 @@ export function Ajustes() {
         </div>
         {erro && <div className="aviso ruim" role="alert">{erro}</div>}
         <div className="botoes">
-          <button className="botao principal" onClick={baixarBackup}><Download size={18} aria-hidden="true" /> Baixar backup</button>
+          <button className="botao principal" onClick={() => baixarBackup(d, hoje())}><Download size={18} aria-hidden="true" /> Baixar backup</button>
           <button className="botao" onClick={() => arquivo.current?.click()}><Upload size={18} aria-hidden="true" /> Restaurar backup</button>
           <input ref={arquivo} type="file" accept="application/json,.json" hidden onChange={restaurar} />
         </div>
