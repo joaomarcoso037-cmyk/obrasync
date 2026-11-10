@@ -30,7 +30,7 @@ O login depende de um envio de e-mail próprio (SMTP) para receber clientes: o e
 
 Só existe no modo com login. A cobrança é feita pelo Asaas: o empreiteiro escolhe o plano no app e paga por Pix (só Pix, sem boleto nem cartão) na página do Asaas. O acesso libera assim que o Pix cai.
 
-- **Teste grátis:** toda conta nova ganha 14 dias, sem cartão. Contas que já existiam ganham 14 dias contados da instalação.
+- **Teste grátis:** toda conta nova ganha 3 dias, sem cartão. O aviso "Faltam X dias" aparece desde o primeiro dia. As 3 contas criadas antes da cobrança ficaram com teste até 24/11/2026.
 - **Planos:** mensal e anual, com preços na tabela `planos` da Supabase (valores em centavos). Mensal: R$ 97,99. Anual: R$ 959,99, que sai R$ 80,00 por mês (18% de economia). Um preço novo vale só para quem assinar depois.
 - **Atraso:** aviso no topo das telas assim que vence. Depois de 7 dias, só a tela de pagamento abre. Os dados não são apagados e podem ser baixados nessa tela.
 - **Troca de plano e cancelamento:** em Ajustes > Assinatura. O tempo já pago continua valendo.
@@ -39,7 +39,7 @@ Só existe no modo com login. A cobrança é feita pelo Asaas: o empreiteiro esc
 Peças:
 
 ```
-supabase/assinaturas.sql                tabelas, teste de 14 dias e regra de bloqueio
+supabase/assinaturas.sql                tabelas, teste de 3 dias e regra de bloqueio
 supabase/functions/assinatura/          cria a assinatura no Asaas e devolve o link de pagamento
 supabase/functions/asaas-webhook/       recebe do Asaas os avisos de pagamento
 src/lib/assinatura.ts                   regra de acesso no app (com testes)

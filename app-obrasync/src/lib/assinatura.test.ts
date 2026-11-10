@@ -4,12 +4,12 @@ import { calcularAcesso, documentoValido, valorPorMes, type Assinatura } from '.
 const agora = new Date('2026-11-10T12:00:00-03:00');
 const dia = (n: number) => new Date(agora.getTime() + n * 86400000).toISOString();
 const conta = (p: Partial<Assinatura>): Assinatura => ({
-  plano: null, testeAte: dia(14), pagoAte: null, cancelada: false, assinou: false, linkPagamento: null, ...p,
+  plano: null, testeAte: dia(3), pagoAte: null, cancelada: false, assinou: false, linkPagamento: null, ...p,
 });
 
 describe('acesso', () => {
-  it('conta nova fica em teste por 14 dias', () => {
-    expect(calcularAcesso(conta({}), agora)).toMatchObject({ estado: 'teste', dias: 14 });
+  it('conta nova fica em teste por 3 dias', () => {
+    expect(calcularAcesso(conta({}), agora)).toMatchObject({ estado: 'teste', dias: 3 });
   });
 
   it('teste que termina em algumas horas ainda conta 1 dia', () => {

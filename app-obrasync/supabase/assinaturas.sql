@@ -30,7 +30,7 @@ create policy "ver planos" on public.planos for select to authenticated using (a
 create table if not exists public.assinaturas (
   user_id uuid primary key references auth.users (id) on delete cascade,
   plano text references public.planos (id),
-  teste_ate timestamptz not null default now() + interval '14 days',
+  teste_ate timestamptz not null default now() + interval '3 days',
   pago_ate timestamptz,
   situacao text not null default 'teste' check (situacao in ('teste', 'ativa', 'atrasada', 'cancelada')),
   asaas_cliente text unique,
@@ -47,6 +47,9 @@ create policy "ver a propria assinatura" on public.assinaturas
   for select to authenticated
   using ((select auth.uid()) = user_id);
 
+-- Garante os 3 dias também onde a tabela já existia com outro prazo.
+alter table public.assinaturas alter column teste_ate set default now() + interval '3 days';
+
 -- Avisos do Asaas já tratados. O Asaas pode mandar o mesmo aviso mais de uma vez.
 create table if not exists public.eventos_asaas (
   id text primary key,
@@ -57,7 +60,7 @@ create table if not exists public.eventos_asaas (
 alter table public.eventos_asaas enable row level security;
 revoke all on public.eventos_asaas from anon, authenticated;
 
--- Toda conta nova começa com 14 dias grátis.
+-- Toda conta nova começa com 3 dias grátis.
 create or replace function public.criar_assinatura_teste()
 returns trigger language plpgsql security definer set search_path = '' as $$
 begin
@@ -72,7 +75,7 @@ create trigger ao_criar_usuario_assinatura
   after insert on auth.users
   for each row execute function public.criar_assinatura_teste();
 
--- Contas que já existiam ganham 14 dias a partir de agora.
+-- Contas que já existiam ganham o teste a partir de agora.
 insert into public.assinaturas (user_id) select id from auth.users on conflict (user_id) do nothing;
 
 -- Regra de acesso: dentro do teste, ou até 7 dias depois do fim do período pago.
