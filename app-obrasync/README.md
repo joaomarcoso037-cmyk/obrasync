@@ -28,7 +28,7 @@ O login depende de um envio de e-mail próprio (SMTP) para receber clientes: o e
 
 ## Mensalidade (Asaas)
 
-Só existe no modo com login. A cobrança é feita pelo Asaas: o empreiteiro escolhe o plano no app e paga por Pix, boleto ou cartão na página do Asaas.
+Só existe no modo com login. A cobrança é feita pelo Asaas: o empreiteiro escolhe o plano no app e paga por Pix (só Pix, sem boleto nem cartão) na página do Asaas. O acesso libera assim que o Pix cai.
 
 - **Teste grátis:** toda conta nova ganha 14 dias, sem cartão. Contas que já existiam ganham 14 dias contados da instalação.
 - **Planos:** mensal e anual, com preços na tabela `planos` da Supabase (valores em centavos). Mensal: R$ 97,99. Anual: R$ 959,99, que sai R$ 80,00 por mês (18% de economia). Um preço novo vale só para quem assinar depois.

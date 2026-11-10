@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { AlertTriangle, CreditCard, Download, ExternalLink, LogOut, RefreshCw } from 'lucide-react';
+import { AlertTriangle, Download, ExternalLink, LogOut, QrCode, RefreshCw } from 'lucide-react';
 import { Campo, Marca } from './ui';
 import {
   assinar, calcularAcesso, cancelarAssinatura, carregarAssinatura, documentoValido, esquecerAssinatura,
@@ -45,11 +45,11 @@ function FormAssinar({ planoAtual, onCancelar }: { planoAtual?: string | null; o
   if (link) {
     return (
       <div className="pilha">
-        <div className="aviso neutro" role="status">Pagamento gerado. Na próxima página você escolhe Pix, boleto ou cartão.</div>
+        <div className="aviso neutro" role="status">Pix gerado. Na próxima página aparecem o QR Code e o código copia e cola.</div>
         <a className="botao destaque" href={link} target="_blank" rel="noopener noreferrer">
-          <ExternalLink size={18} aria-hidden="true" /> Abrir página de pagamento
+          <ExternalLink size={18} aria-hidden="true" /> Abrir o Pix
         </a>
-        <p style={{ color: 'var(--suave)' }}>Pix libera o acesso na hora. Boleto pode levar até 3 dias úteis para ser confirmado. O link também foi para o seu e-mail.</p>
+        <p style={{ color: 'var(--suave)' }}>Pague pelo app do seu banco. O acesso libera assim que o Pix cair, em poucos segundos. O link também foi para o seu e-mail.</p>
       </div>
     );
   }
@@ -83,7 +83,7 @@ function FormAssinar({ planoAtual, onCancelar }: { planoAtual?: string | null; o
       {mensagem && <div className="aviso neutro" role="status">{mensagem}</div>}
       <div className="botoes">
         <button className="botao principal" type="submit" disabled={ocupado}>
-          <CreditCard size={18} aria-hidden="true" /> {ocupado ? 'Gerando pagamento...' : 'Continuar para o pagamento'}
+          <QrCode size={18} aria-hidden="true" /> {ocupado ? 'Gerando Pix...' : 'Gerar Pix'}
         </button>
         {onCancelar && <button className="botao" type="button" onClick={onCancelar}>Voltar</button>}
       </div>

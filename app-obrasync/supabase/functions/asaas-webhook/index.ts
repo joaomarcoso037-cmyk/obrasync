@@ -34,8 +34,8 @@ async function tratarCobranca(evento: Evento) {
   switch (evento.event) {
     case 'PAYMENT_CONFIRMED':
     case 'PAYMENT_RECEIVED': {
-      // Cartão avisa CONFIRMED na hora e RECEIVED semanas depois; Pix avisa só RECEIVED.
-      // Os dois levam ao mesmo resultado, então o segundo aviso não muda nada.
+      // Pix avisa RECEIVED. CONFIRMED fica tratado igual caso outra forma de pagamento volte a ser usada;
+      // um segundo aviso da mesma cobrança não muda nada.
       const { data: plano } = await banco.from('planos').select('ciclo').eq('id', linha.plano).single();
       const cobre = fimDoDia(somarCiclo(p.dueDate, plano?.ciclo ?? 'MONTHLY'));
       const atual = linha.pago_ate as string | null;

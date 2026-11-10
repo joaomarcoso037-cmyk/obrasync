@@ -69,7 +69,7 @@ async function assinar(user: { id: string; email?: string }, corpo: Record<strin
 
   const nova = await asaas<{ id: string }>('POST', '/subscriptions', {
     customer: cliente,
-    billingType: 'UNDEFINED', // o empreiteiro escolhe Pix, boleto ou cartão na página de pagamento
+    billingType: 'PIX', // só Pix: libera na hora e não tem boleto para esperar compensar
     value: plano.valor_centavos / 100,
     nextDueDate: vencimento,
     cycle: plano.ciclo,
